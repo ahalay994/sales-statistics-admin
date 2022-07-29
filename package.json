@@ -1,0 +1,44 @@
+{
+  "name": "sales-statistics-admin",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@vicons/carbon": "^0.12.0",
+    "@vicons/fluent": "^0.12.0",
+    "@vicons/material": "^0.12.0",
+    "@vicons/utils": "^0.1.4",
+    "autoprefixer": "^10.4.7",
+    "axios": "^0.27.2",
+    "core-js": "^3.23.5",
+    "mande": "^2.0.2",
+    "naive-ui": "^2.31.0",
+    "pinia": "^2.0.17",
+    "postcss": "^8.4.14",
+    "tailwindcss": "^3.1.6",
+    "vfonts": "^0.0.3",
+    "vite-plugin-pages": "^0.25.0",
+    "vite-plugin-vue-layouts": "^0.7.0",
+    "vue": "^3.2.37",
+    "vue-extend-layout": "^2.0.6",
+    "vue-native-websocket-vue3": "^3.1.6",
+    "vue-router": "4",
+    "vuex": "^4.0.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^3.0.0",
+    "@vue/cli-plugin-pwa": "^5.0.8",
+    "@vue/cli-plugin-router": "^5.0.8",
+    "@vue/cli-plugin-vuex": "^5.0.8",
+    "@vue/cli-service": "^5.0.8",
+    "@vue/compiler-sfc": "^3.2.37",
+    "sass": "^1.54.0",
+    "sass-loader": "^13.0.2",
+    "vite": "^3.0.0"
+  }
+}
