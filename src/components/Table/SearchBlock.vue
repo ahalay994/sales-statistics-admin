@@ -23,7 +23,7 @@ export default {
             this.$emit('update:modelValue', value);
         },
         search() {
-            this.$emit('pageUpdate');
+            this.$emit('search');
         },
         reset() {
             this.$emit('update:modelValue', '');

@@ -23,6 +23,8 @@
         v-model="pageData"
         @update="pageUpdate"
         :pageCount="pageCount"
+        :limitData="limit"
+        :totalCount="totalCount"
     />
 </template>
 
@@ -83,11 +85,14 @@ export default {
             type: Number,
             default: 1,
         },
+        totalCount: {
+            type: Number,
+            default: 0,
+        },
     },
     data() {
         return {
-            limitData: Number(this.route?.query?.limit) || this.limit,
-            pageData: Number(this.route?.query?.page) || this.page,
+            pageData: this.page,
         }
     },
     methods: {
@@ -101,18 +106,14 @@ export default {
             this.pageUpdate();
         },
         search() {
-            this.page = 1;
+            this.pageData = 1;
             this.pageUpdate();
         },
         pageUpdate() {
-            if (this.pageData > 1) {
-                router.replace({query: {page: this.pageData, limit: this.limitData}});
-            } else {
-                router.replace({query: {}});
-            }
+            router.replace({query: this.pageData > 1 ? {page: this.pageData} : {}});
 
+            const paginationQuery = {page: this.pageData, limit: this.limit};
             const searchQuery = {search: this.searchValues};
-            const paginationQuery = {page: this.pageData};
             let sortQuery = {};
             if (this.sortValues) {
                 const fieldName = this.sortValues.columnKey;

@@ -9,8 +9,9 @@
                 :store="accessStore"
                 model="access"
                 buttonText="Добавить роль"
-                :limit="limit"
-                :page="page"
+                :limit="limitData"
+                :page="pageData"
+                :totalCount="totalCount"
             />
         </n-card>
     </n-space>
@@ -25,7 +26,6 @@ import ButtonGroup from "@c/Table/ButtonGroup.vue";
 import Pagination from "@c/Table/Pagination.vue";
 import Table from "@c/Table/index.vue";
 import {useRoute} from 'vue-router';
-import router from '@/router';
 
 export default {
     name: "Dashboard",
@@ -53,18 +53,19 @@ export default {
 
         // data
         const accessStore = Access();
-        const {accesses, loading, totalPages} = storeToRefs(accessStore);
-        const page = Number(route.query?.page) || 1;
-        const limit = Number(route.query?.limit) || 10;
-        accessStore.getAll({page, limit});
+        const {accesses, loading, totalPages, limit, page, totalCount} = storeToRefs(accessStore);
+        const pageData = Number(route.query?.page) || page.value;
+        const limitData = Number(limit.value);
+        accessStore.getAll({page: pageData, limit: limitData});
 
         return {
             totalPages,
             accessStore,
             loading,
             accesses,
-            page,
-            limit,
+            pageData,
+            limitData,
+            totalCount,
         }
     },
     data() {

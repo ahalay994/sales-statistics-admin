@@ -3,11 +3,11 @@
         :page="modelValue"
         @update:page="updatePage"
         :page-count="pageCount"
-        :default-page-size="10"
+        :default-page-size="limitData"
     >
-<!--        <template #prefix="{ itemCount, startIndex }">
-            Страница {{itemCount}} из {{startIndex}}. Всего записей: 3
-        </template>-->
+        <template #prefix>
+            Всего записей: {{totalCount}}
+        </template>
     </n-pagination>
 </template>
 
@@ -22,7 +22,15 @@ export default {
         pageCount: {
             type: Number,
             default: 1,
-        }
+        },
+        limitData: {
+            type: Number,
+            default: 1,
+        },
+        totalCount: {
+            type: Number,
+            default: 0,
+        },
     },
     methods: {
         updatePage(currentPage) {

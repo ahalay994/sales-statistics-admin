@@ -7,6 +7,9 @@ export const Access = defineStore('access', {
         access: {},
         loading: false,
         totalPages: 0,
+        limit: 10,
+        page: 1,
+        totalCount: 0,
     }),
     getters: {},
     actions: {
@@ -15,7 +18,10 @@ export const Access = defineStore('access', {
 
             const accesses = await getAll(params);
             this.accesses = accesses.data;
-            this.totalPages = accesses.pagination.totalPages;
+            this.totalPages = accesses.pagination?.totalPages;
+            this.limit = accesses.pagination?.limit;
+            this.page = accesses.pagination?.page;
+            this.totalCount = accesses.pagination?.totalCount;
 
             this.setLoading(false);
             return accesses.data;
