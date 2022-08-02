@@ -110,14 +110,8 @@ export default {
         }
     },
     methods: {
-        showEvent() {
-            console.log(123);
-        },
-        editEvent() {
-            console.log(456);
-        },
         deleteEvent() {
-            console.log(789);
+            console.log('delete');
         },
     }
 }

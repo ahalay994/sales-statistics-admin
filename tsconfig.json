@@ -15,7 +15,7 @@
       "@/*": ["src/*"],
       "@c/*": ["src/components/*"],
       "@r/*": ["src/router/*"],
-      "@s/*": ["src/store/*"],
+      "@s/*": ["src/stores/*"],
       "@v/*": ["src/views/*"]
     },
     "lib": [

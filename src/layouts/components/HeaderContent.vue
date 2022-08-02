@@ -13,7 +13,9 @@
             </NSpace>
         </template>
         <template #avatar>
-            <NAvatar
+            <n-avatar
+                color="#ffffff"
+                round
                 :src="pagination.icon"
             />
         </template>

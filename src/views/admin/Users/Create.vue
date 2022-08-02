@@ -36,7 +36,7 @@ export default {
         const pagination = {
             title: `Создание пользователя`,
             route: 'admin.users',
-            icon: 'https://cdnimg103.lizhi.fm/user/2017/02/04/2583325032200238082_160x160.jpg'
+            icon: '/images/user/add.svg'
         }
 
         this.mainStore.setBreadcrumbs(breadcrumbs);

@@ -44,7 +44,11 @@ const menuOptions = [
                 key: "users"
             },
             {
-                label: "Права доступа",
+                label: () => h(RouterLink, {
+                    to: {
+                        name: "admin.access",
+                    }
+                }, { default: () => "Роли" }),
                 key: "users.access"
             },
             {

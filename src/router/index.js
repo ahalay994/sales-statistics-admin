@@ -11,6 +11,7 @@ import admin from './admin.js';
 import AppLayoutAdmin from '@/layouts/AppLayoutAdmin.vue';
 import Dashboard from "@v/admin/Dashboard.vue";
 import users from './admin/users.js';
+import access from './admin/access.js';
 
 const routes = [
     {
@@ -35,7 +36,8 @@ const routes = [
                 name: 'admin.dashboard',
                 component: Dashboard,
             },
-            ...Object.values(users)
+            ...Object.values(users),
+            ...Object.values(access),
         ]
     }
 ];

@@ -21,7 +21,7 @@ export default {
         const usersStore = Users();
         const accessStore = Access();
 
-        accessStore.getAccesses(true);
+        accessStore.getAll(true);
         const {loading} = storeToRefs(usersStore);
         return {
             mainStore,

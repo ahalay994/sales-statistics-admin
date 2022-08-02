@@ -25,7 +25,7 @@ export default {
         const accesses = ref([]);
 
         onMounted(async () => {
-            accesses.value = await accessStore.getAccesses();
+            accesses.value = await accessStore.getAll();
         });
 
         return {
