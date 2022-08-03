@@ -47,7 +47,6 @@ export const Users = defineStore('users', {
             this.pagination = users.pagination;
 
             this.setLoading(false);
-            return records.data;
         },
         async getRecord(id) {
             const user = await getRecord(id);
