@@ -1,5 +1,5 @@
 <template>
-    <NMenu
+    <n-menu
         :collapsed-width="collapsedWidth"
         :collapsed-icon-size="collapsedIconSize"
         :options="menuOptions"
@@ -8,13 +8,9 @@
 
 <script>
 import {h} from "vue";
-import { RouterLink } from "vue-router";
-import {NIcon, NMenu} from "naive-ui";
-import {
-    LibraryBooksOutlined as BookIcon,
-    PersonFilled as PersonIcon,
-    WineBarFilled as WineIcon
-} from "@vicons/material";
+import {RouterLink} from "vue-router";
+import {NIcon} from "naive-ui";
+import {LibraryBooksOutlined} from "@vicons/material";
 
 function renderIcon(icon) {
     return () => h(NIcon, null, {default: () => h(icon)});
@@ -26,21 +22,21 @@ const menuOptions = [
             to: {
                 name: "admin.dashboard",
             }
-        }, { default: () => "Dashboard" }),
+        }, {default: () => "Dashboard"}),
         key: "admin.dashboard",
-        icon: renderIcon(BookIcon)
+        icon: renderIcon(LibraryBooksOutlined)
     },
     {
         label: "Пользователи",
         key: "users",
-        icon: renderIcon(BookIcon),
+        icon: renderIcon(LibraryBooksOutlined),
         children: [
             {
                 label: () => h(RouterLink, {
                     to: {
                         name: "admin.users",
                     }
-                }, { default: () => "Пользователи" }),
+                }, {default: () => "Пользователи"}),
                 key: "users"
             },
             {
@@ -48,7 +44,7 @@ const menuOptions = [
                     to: {
                         name: "admin.access",
                     }
-                }, { default: () => "Роли" }),
+                }, {default: () => "Роли"}),
                 key: "users.access"
             },
             {
@@ -68,7 +64,7 @@ const menuOptions = [
     {
         label: "Продукция",
         key: "products",
-        icon: renderIcon(BookIcon),
+        icon: renderIcon(LibraryBooksOutlined),
         children: [
             {
                 label: "Категории",
@@ -91,7 +87,7 @@ const menuOptions = [
     {
         label: "Магазины",
         key: "shops",
-        icon: renderIcon(BookIcon),
+        icon: renderIcon(LibraryBooksOutlined),
         children: [
             {
                 label: "Магазины",
@@ -111,9 +107,6 @@ const menuOptions = [
 
 export default {
     name: "Menu",
-    components: {
-        NMenu,
-    },
     props: {
         collapsedWidth: {
             type: Number,
@@ -131,7 +124,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-
-</style>

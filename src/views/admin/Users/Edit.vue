@@ -1,15 +1,15 @@
 <template>
-    <n-card v-if="!loading">
+    <n-card v-if="!loading && !!user">
         <Tabs :data="user" />
     </n-card>
 </template>
 
 <script>
+import {storeToRefs} from "pinia";
 import {Main} from '@/stores/main.js';
 import {Users} from "@/stores/users.js";
 import {Access} from "@/stores/access.js";
 import Tabs from './Tabs/index.vue';
-import {storeToRefs} from "pinia";
 
 export default {
     name: "Edit",
@@ -21,7 +21,7 @@ export default {
         const usersStore = Users();
         const accessStore = Access();
 
-        accessStore.getAll(true);
+        accessStore.getRecords(true);
         const {loading} = storeToRefs(usersStore);
         return {
             mainStore,
@@ -31,7 +31,7 @@ export default {
     },
     data() {
         return {
-            user: {},
+            user: null,
         }
     },
     computed: {
@@ -61,9 +61,9 @@ export default {
 
         this.mainStore.setBreadcrumbs(breadcrumbs);
         this.mainStore.setPagination(pagination);
-        this.usersStore.getUser(this.id);
-        const {user} = storeToRefs(this.usersStore)
-        this.user = user;
+        this.usersStore.getRecord(this.id);
+        const {record} = storeToRefs(this.usersStore);
+        this.user = record;
     }
 }
 </script>

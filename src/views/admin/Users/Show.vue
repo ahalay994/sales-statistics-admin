@@ -118,9 +118,9 @@ export default {
 
         this.mainStore.setBreadcrumbs(breadcrumbs);
         this.mainStore.setPagination(pagination);
-        this.usersStore.getUser(this.id);
-        const {user} = storeToRefs(this.usersStore)
-        this.user = user;
+        this.usersStore.getRecord(this.id);
+        const {record} = storeToRefs(this.usersStore);
+        this.user = record;
     }
 }
 </script>

@@ -14,14 +14,12 @@
 </template>
 
 <script>
-import {darkTheme, lightTheme, ruRU, dateRuRU, NMessageProvider, NThemeEditor} from 'naive-ui';
+import {darkTheme, lightTheme, ruRU, dateRuRU} from 'naive-ui';
 import {defineComponent} from 'vue';
 import AppLayout from '@/layouts/AppLayout.vue';
 
 export default defineComponent({
     components: {
-        NMessageProvider,
-        NThemeEditor,
         AppLayout,
     },
     setup() {

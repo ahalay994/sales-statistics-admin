@@ -1,12 +1,10 @@
-import { createRouter, createWebHistory } from 'vue-router';
-import { Auth } from '@/stores/auth';
+import {createRouter, createWebHistory} from 'vue-router';
+import {Auth} from '@/stores/auth';
 
 import guest from './middleware/guest';
 import auth from './middleware/auth';
 import isAdmin from './middleware/isAdmin';
 import middlewarePipeline from './middlewarePipeline';
-
-import admin from './admin.js';
 
 import AppLayoutAdmin from '@/layouts/AppLayoutAdmin.vue';
 import Dashboard from "@v/admin/Dashboard.vue";
@@ -25,7 +23,7 @@ const routes = [
     {
         path: '/admin',
         name: 'admin',
-        redirect: { name: 'admin.dashboard' },
+        redirect: {name: 'admin.dashboard'},
         meta: {
             layout: AppLayoutAdmin,
             // middleware: [isAdmin],

@@ -13,19 +13,15 @@ export default {
     name: "AddedBtn",
     props: {
         model: {
-            type: String
+            type: String,
         },
         buttonText: {
-            type: String
+            type: String,
         },
         divider: {
             type: Boolean,
             default: true,
-        }
+        },
     }
 }
 </script>
-
-<style scoped>
-
-</style>

@@ -1,36 +1,27 @@
 import {defineStore} from 'pinia';
-import {get, getAll} from '@/api/access.js';
+import {getRecord, getRecords} from '@/api/access.js';
 
 export const Access = defineStore('access', {
     state: () => ({
-        accesses: [],
-        access: {},
+        records: null,
+        record: null,
         loading: false,
-        totalPages: 0,
-        limit: 10,
-        page: 1,
-        totalCount: 0,
+        pagination: null,
     }),
     getters: {},
     actions: {
-        async getAll(params = null) {
+        async getRecords(params = {}) {
             this.setLoading(true);
-
-            const accesses = await getAll(params);
-            this.accesses = accesses.data;
-            this.totalPages = accesses.pagination?.totalPages;
-            this.limit = accesses.pagination?.limit;
-            this.page = accesses.pagination?.page;
-            this.totalCount = accesses.pagination?.totalCount;
-
+            const accesses = await getRecords(params);
+            this.records = accesses.data;
+            this.pagination = accesses.pagination;
             this.setLoading(false);
             return accesses.data;
         },
         async get(key) {
             this.setLoading(true);
-
-            const access = await get(key);
-            this.access = access.data;
+            const access = await getRecord(key);
+            this.record = access.data;
             this.setLoading(false);
 
             return access.data;

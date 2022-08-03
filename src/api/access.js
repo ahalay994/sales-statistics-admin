@@ -1,14 +1,17 @@
 import {mande} from 'mande';
-const accesses = mande('/api/access');
+const records = mande('/api/access');
 
 function formattedSearchParams(params) {
     return new URLSearchParams(params).toString();
 }
+export function setToken(token) {
+    records.options.headers.Authorization = 'Bearer ' + token
+}
 
-export const getAll = async (params) => accesses.get(!!params ? `?${formattedSearchParams(params)}` : '/');
-export const get = async id => accesses.get(id);
-export const createAccess = async data => accesses.post(data);
-export const updateAccess = async data => accesses.put(data);
-export const deleteAccess = async id => accesses.delete(id);
-export const restoreAccess = async id => accesses.patch(id);
+export const getRecords = async (params) => records.get(!!params ? `?${formattedSearchParams(params)}` : '/');
+export const getRecord = async id => records.get(id);
+export const createRecord = async data => records.post(data);
+export const updateRecord = async (id, data) => records.put(id, data);
+export const deleteRecord = async id => records.delete(id);
+export const restoreRecord = async id => records.patch(id);
 

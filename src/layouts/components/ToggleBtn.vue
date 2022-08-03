@@ -1,21 +1,17 @@
 <template>
     <button type="button" @click="toggle" class="flex p-1 rounded-full hover:bg-gray-100">
-        <NIcon size="24">
-            <MenuOpenFilled />
-        </NIcon>
+        <n-icon size="24">
+            <MenuOpenFilled/>
+        </n-icon>
     </button>
 </template>
 
 <script>
-import {NIcon} from 'naive-ui';
-import {
-    MenuOpenFilled
-} from "@vicons/material";
+import {MenuOpenFilled} from "@vicons/material";
 
 export default {
     name: "ToggleBtn",
     components: {
-        NIcon,
         MenuOpenFilled,
     },
     props: {
@@ -31,7 +27,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-
-</style>

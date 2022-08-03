@@ -1,6 +1,6 @@
 <template>
-    <NLayout has-sider class="layout">
-        <NLayoutSider
+    <n-layout has-sider class="layout">
+        <n-layout-sider
             bordered
             show-trigger="bar"
             @collapse="toggleCollapsed(true)"
@@ -11,33 +11,25 @@
             :collapsed-width="collapsedWidth"
             :native-scrollbar="false"
         >
-            <NLayoutHeader position="static">
-                <logo :collapsed="collapsed"/>
-            </NLayoutHeader>
+            <n-layout-header position="static">
+                <Logo :collapsed="collapsed"/>
+            </n-layout-header>
 
-            <NLayoutContent>
+            <n-layout-content>
                 <Menu :collapsed-width="collapsedWidth" />
-            </NLayoutContent>
-        </NLayoutSider>
+            </n-layout-content>
+        </n-layout-sider>
 
-        <NLayoutContent class="layout-content">
-            <NLayoutHeader position="static" class="shadow-sm">
+        <n-layout-content class="layout-content">
+            <n-layout-header position="static" class="shadow-sm">
                 <HeaderContent :collapsed="collapsed" @toggle="toggleCollapsed" />
-            </NLayoutHeader>
+            </n-layout-header>
             <slot />
-        </NLayoutContent>
-    </NLayout>
+        </n-layout-content>
+    </n-layout>
 </template>
 
 <script>
-import {
-    NLayout,
-    NLayoutHeader,
-    NLayoutContent,
-    NLayoutFooter,
-    NLayoutSider,
-    NSpace,
-} from 'naive-ui';
 import {ref} from "vue";
 import Logo from '@c/Logo.vue';
 import Menu from "@/layouts/components/Menu.vue";
@@ -47,12 +39,6 @@ export default {
     name: "AppLayoutAdmin",
     components: {
         HeaderContent,
-        NLayout,
-        NLayoutHeader,
-        NLayoutContent,
-        NLayoutFooter,
-        NLayoutSider,
-        NSpace,
         Logo,
         Menu,
     },

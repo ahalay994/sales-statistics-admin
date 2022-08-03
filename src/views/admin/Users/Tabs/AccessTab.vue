@@ -11,6 +11,7 @@
 <script>
 import {Access} from "@/stores/access.js";
 import {ref, onMounted} from 'vue';
+import {getRecords} from "@/api/access.js";
 
 export default {
     name: "AccessTab",
@@ -25,7 +26,7 @@ export default {
         const accesses = ref([]);
 
         onMounted(async () => {
-            accesses.value = await accessStore.getAll();
+            accesses.value = await accessStore.getRecords();
         });
 
         return {

@@ -1,16 +1,16 @@
 <template>
     <n-page-header subtitle="" :title="pagination.title" @back="handleBack" class="p-4">
         <template #header>
-            <NSpace justify="space-between">
-                <NSpace align="center">
+            <n-space justify="space-between">
+                <n-space align="center">
                     <ToggleBtn :collapsed="collapsed" @toggle="toggleCollapsed"/>
                     <RefreshBtn/>
                     <Breadcrumb/>
-                </NSpace>
-                <NSpace>
+                </n-space>
+                <n-space>
                     <ProfileToggle/>
-                </NSpace>
-            </NSpace>
+                </n-space>
+            </n-space>
         </template>
         <template #avatar>
             <n-avatar
@@ -24,9 +24,9 @@
 
 <script>
 import {storeToRefs} from 'pinia';
-import {Main} from '@/stores/main.js';
 import router from '@/router';
-import {useMessage, NSpace, NAvatar} from "naive-ui";
+import {Main} from '@/stores/main.js';
+import {useMessage} from "naive-ui";
 import Breadcrumb from "@/layouts/components/Breadcrumb.vue";
 import RefreshBtn from "@/layouts/components/RefreshBtn.vue";
 import ToggleBtn from '@/layouts/components/ToggleBtn.vue';
@@ -35,18 +35,16 @@ import ProfileToggle from "@/layouts/components/ProfileToggle.vue";
 export default {
     name: "HeaderContent",
     components: {
-        ProfileToggle,
-        NSpace,
-        NAvatar,
         Breadcrumb,
         RefreshBtn,
         ToggleBtn,
+        ProfileToggle,
     },
     props: {
         collapsed: {
             type: Boolean,
-            default: false
-        }
+            default: false,
+        },
     },
     setup() {
         const message = useMessage();
@@ -73,7 +71,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .n-page-header-header {
     margin-bottom: 10px;
 }

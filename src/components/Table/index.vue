@@ -3,6 +3,7 @@
         @reset="reset"
         v-model="searchValues"
         @search="search"
+        @clear="pageUpdate"
     >
         <AddedBtn
             v-if="model && buttonText"
@@ -20,21 +21,23 @@
     />
     <Pagination
         class="justify-end mt-2"
-        v-model="pageData"
+        v-model="page"
         @update="pageUpdate"
-        :pageCount="pageCount"
-        :limitData="limit"
-        :totalCount="totalCount"
+        :pageCount="pagination?.pageCount"
+        :limitData="pagination?.limit"
+        :totalCount="pagination?.totalCount"
     />
 </template>
 
 <script>
-import Pagination from "@c/Table/Pagination.vue";
-import SearchBlock from "@c/Table/SearchBlock.vue";
 import {ref} from "vue";
-import AddedBtn from "@c/Table/AddedBtn.vue";
-import { useRoute } from 'vue-router';
+import {useRoute} from 'vue-router';
+import {storeToRefs} from "pinia";
 import router from '@/router';
+import AddedBtn from "@c/Table/AddedBtn.vue";
+import SearchBlock from "@c/Table/SearchBlock.vue";
+import Pagination from "@c/Table/Pagination.vue";
+import {getRecords} from "@/api/access.js";
 
 export default {
     name: "Table",
@@ -51,13 +54,15 @@ export default {
     },
     props: {
         store: {
-            type: Object
+            type: Object,
+            required: true,
         },
         model: {
-            type: String
+            type: String,
+            required: true,
         },
         buttonText: {
-            type: String
+            type: String,
         },
         // table
         columns: {
@@ -68,51 +73,28 @@ export default {
             type: Array,
             default: Array.prototype,
         },
-        loading: {
-            type: Boolean,
-            default: true,
-        },
-        // pagination
-        pageCount: {
-            type: Number,
-            default: 0,
-        },
-        limit: {
-            type: Number,
-            default: 10,
-        },
-        page: {
-            type: Number,
-            default: 1,
-        },
-        totalCount: {
-            type: Number,
-            default: 0,
-        },
     },
     data() {
         return {
-            pageData: this.page,
-        }
+            loading: true,
+            pagination: {},
+            page: 1,
+        };
+    },
+    mounted() {
+        const {loading, pagination} = storeToRefs(this.store);
+        Object.assign(this, {
+            loading,
+            pagination,
+            page: pagination.value.page,
+        });
     },
     methods: {
-        reset() {
-            this.store.loading = true;
-            this.store.getAll();
-            this.tableRef.sort(null);
-        },
-        sorter(value) {
-            this.sortValues = value;
-            this.pageUpdate();
-        },
-        search() {
-            this.pageData = 1;
-            this.pageUpdate();
-        },
         pageUpdate() {
-            router.replace({query: this.pageData > 1 ? {page: this.pageData} : {}});
+            // отображение в урле параметров пагинации
+            router.replace({name: `admin.${this.model}`, query: this.page > 1 ? {page: this.page} : {}});
 
-            const paginationQuery = {page: this.pageData, limit: this.limit};
+            const paginationQuery = {page: this.page};
             const searchQuery = {search: this.searchValues};
             let sortQuery = {};
             if (this.sortValues) {
@@ -121,12 +103,22 @@ export default {
                 sortQuery = {[fieldName]: orderType};
             }
 
-            this.store.getAll({...searchQuery, ...sortQuery, ...paginationQuery});
-        }
+            this.store.getRecords({...searchQuery, ...sortQuery, ...paginationQuery});
+        },
+        // search block
+        reset() {
+            this.page = 1;
+            this.tableRef.sort(null);
+        },
+        search() {
+            this.page = 1;
+            this.pageUpdate();
+        },
+        // table
+        sorter(value) {
+            this.sortValues = value;
+            this.pageUpdate();
+        },
     }
 }
 </script>
-
-<style scoped>
-
-</style>
