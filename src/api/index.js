@@ -1,26 +1,26 @@
-import {mande} from "mande";
-import {getLocalStorage, formattedSearchParams} from '@/helper';
+import {formattedSearchParams, initMande} from '@/helper';
 
-export function Api(model) {
-    this._records = mande(`/api/${model}`);
-    this._records.options.headers.Authorization = `Bearer ${getLocalStorage('token')}`;
+export default class Api {
+    constructor(model) {
+        this._records = initMande(model);
+    }
 
-    this.getRecords = async(params) => {
+    async getRecords(params) {
         return this._records.get(!!params ? `?${formattedSearchParams(params)}` : '/');
     }
-    this.getRecord = async(id) => {
+    async getRecord(id) {
         return this._records.get(id);
     }
-    this.createRecord = async(data) => {
+    async createRecord(data) {
         return this._records.post(data);
     }
-    this.updateRecord = async(id, data) => {
+    async updateRecord(id, data) {
         return this._records.put(id, data);
     }
-    this.deleteRecord = async(id) => {
+    async deleteRecord(id) {
         return this._records.delete(id);
     }
-    this.restoreRecord = async(id) => {
+    async restoreRecord(id) {
         return this._records.patch(id);
     }
 }

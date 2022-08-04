@@ -1,5 +1,6 @@
 import {defineStore} from 'pinia';
-import {getRecord, getRecords} from '@/api/users.js';
+import UsersApi from '@/api/users.js';
+const usersApi = new UsersApi('user');
 
 export const Users = defineStore('users', {
     state: () => ({
@@ -42,14 +43,14 @@ export const Users = defineStore('users', {
         async getRecords(params = {}) {
             this.setLoading(true);
 
-            const users = await getRecords(params);
+            const users = await usersApi.getRecords(params);
             this.records = users.data;
             this.pagination = users.pagination;
 
             this.setLoading(false);
         },
         async getRecord(id) {
-            const user = await getRecord(id);
+            const user = await usersApi.getRecord(id);
             this.record = user.data;
             this.setLoading(false);
         },

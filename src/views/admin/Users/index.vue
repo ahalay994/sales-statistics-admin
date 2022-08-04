@@ -21,7 +21,7 @@ import {Auth} from '@/stores/auth.js';
 import {Main} from '@/stores/main.js';
 import {Users} from '@/stores/users.js';
 import {formatDate} from '@/helper/index.js';
-import {updateBlockedUser, setToken} from '@/api/users.js';
+import UsersApi from '@/api/users.js';
 import {NSwitch} from "naive-ui";
 import Table from "@c/Table/index.vue";
 import ButtonGroup from '@c/Table/ButtonGroup.vue';
@@ -30,6 +30,7 @@ export default {
     name: "Users",
     setup() {
         const authStore = Auth();
+        const userApi = new UsersApi('user');
 
         const mainStore = Main();
         const {setBreadcrumbs, setPagination} = mainStore;
@@ -56,6 +57,7 @@ export default {
 
         const {records} = storeToRefs(usersStore);
         return {
+            userApi,
             records,
             usersStore,
             authStore,
@@ -105,8 +107,7 @@ export default {
                             value: row.isBlocked,
                             "onUpdate:value": (value) => {
                                 row.isBlocked = value;
-                                setToken($this.authStore.token);
-                                updateBlockedUser(row.id, {
+                                $this.userApi.updateBlockedUser(row.id, {
                                     isBlocked: value
                                 });
                             }

@@ -1,5 +1,3 @@
-import {Api} from './index.js';
+import Api from './index.js';
 
-export function AccessApi(model) {
-    Api.apply(this, arguments);
-}
+export default class AccessApi extends Api {}

@@ -1,5 +1,5 @@
 import {defineStore} from 'pinia';
-import {AccessApi} from '@/api/access.js';
+import AccessApi from '@/api/access.js';
 const accessApi = new AccessApi('access');
 
 export const Access = defineStore('access', {
