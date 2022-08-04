@@ -1,9 +1,11 @@
 import {defineStore} from 'pinia';
 import {login} from '@/api/auth.js';
+import {getLocalStorage, setLocalStorage} from '@/helper';
 
 export const Auth = defineStore('auth', {
     state: () => ({
-        user: !!localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null,
+        user: getLocalStorage('user'),
+        token: getLocalStorage('token'),
     }),
     getters: {
         loggedIn: (state) => !!state.user,
@@ -24,7 +26,8 @@ export const Auth = defineStore('auth', {
             this.$reset();
         },
         updateUser(payload) {
-            localStorage.setItem('user', JSON.stringify(payload.data));
+            setLocalStorage('user', payload.data);
+            setLocalStorage('token', payload.data.accessToken);
             this.user = payload;
         },
     }

@@ -37,7 +37,6 @@ import router from '@/router';
 import AddedBtn from "@c/Table/AddedBtn.vue";
 import SearchBlock from "@c/Table/SearchBlock.vue";
 import Pagination from "@c/Table/Pagination.vue";
-import {getRecords} from "@/api/access.js";
 
 export default {
     name: "Table",

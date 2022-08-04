@@ -1,5 +1,6 @@
 import {defineStore} from 'pinia';
-import {getRecord, getRecords} from '@/api/access.js';
+import {AccessApi} from '@/api/access.js';
+const accessApi = new AccessApi('access');
 
 export const Access = defineStore('access', {
     state: () => ({
@@ -12,7 +13,7 @@ export const Access = defineStore('access', {
     actions: {
         async getRecords(params = {}) {
             this.setLoading(true);
-            const accesses = await getRecords(params);
+            const accesses = await accessApi.getRecords(params);
             this.records = accesses.data;
             this.pagination = accesses.pagination;
             this.setLoading(false);
@@ -20,7 +21,7 @@ export const Access = defineStore('access', {
         },
         async get(key) {
             this.setLoading(true);
-            const access = await getRecord(key);
+            const access = await accessApi.getRecord(key);
             this.record = access.data;
             this.setLoading(false);
 
